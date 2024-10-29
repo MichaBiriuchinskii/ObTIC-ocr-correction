@@ -22,3 +22,5 @@ rad.json
 TestResults.xml
 # macOS system files
 .DS_Store
+# used to make Git track otherwise empty folders
+.gitkeep
