@@ -26,11 +26,39 @@ pip install -r requirements.txt
 python -m pip install git+https://github.com/JonnoB/scrambledtext
 ```
 ## Data
-Dataset used is deployed on huggingface datasets : [ICDAR2017-filtered-1800-1900-6](https://huggingface.co/datasets/m-biriuchinskii/ICDAR2017-filtered-1800-1900-6)
 
-## Library code description
-- lib/split_corpus.py # divide the filtered on years dataset into test, dev, train
-- lib/send_to_hugging_face.py # create the first version of the dataset without tokenization in phrases [ICDAR2017-filtered-1800-1900](https://huggingface.co/datasets/m-biriuchinskii/ICDAR2017-filtered-1800-1900)
+The dataset used in this project is deployed on Hugging Face Datasets: [ICDAR2017-filtered-1800-1900-6](https://huggingface.co/datasets/m-biriuchinskii/ICDAR2017-filtered-1800-1900-6).
+
+## Library Code Description
+
+- **lib/split_corpus.py**: Divides the filtered dataset (data/ICDAR2017-filtered-1800-1900.zip) into three subsets: test, development, and training data.
+  
+- **lib/send_to_hugging_face_corpus_standard.py**: Creates the first version of the dataset without tokenization of the phrases. This version is available on Hugging Face: [ICDAR2017-filtered-1800-1900](https://huggingface.co/datasets/m-biriuchinskii/ICDAR2017-filtered-1800-1900).
+
+- **lib/send_to_hugging_face_corpus_tokenized_filtered.py**: Tokenizes the first version of the dataset into phrases and applies an 85% similarity threshold.
+
+- **clean_tokenized_corpus_15_percent.py**: Filters out cases where the Character Error Rate (CER) is 0, ensuring that only 15% of the dataset contains cases with zero CER.
+
+- **calculating_corrpution.py**: Script to calculate corruption percentages between OCR and ground truth (GT) phrases in the dataset.
+
+- **corrputing_text.py**: Based on the corruption percentages calculated earlier, this script introduces realistic errors to create a "Sentence_OCR_corrupted" column in the dataset, giving us the final version of the dataset - [ICDAR2017-filtered-1800-1900-6](https://huggingface.co/datasets/m-biriuchinskii/ICDAR2017-filtered-1800-1900-6).
+
+- **lib/metrics.py**: Contains functions to calculate various performance metrics.
+
+- **lib/fine-tune-the-model.py**: Main script for fine-tuning the model on either real or synthetic data.
+
+- **lib/fine-tune-the-model-mixted-corpus.py**: Main script for fine-tuning the model using a mixed dataset with an 80/20 split between real and synthetic data.
+
+- **evaluate_trained_model_synt_data.py**: Script to evaluate the trained model using synthetic data.
+
+- **evaluate_trained_model_on_real_data.py**: Script to evaluate the trained model using real data.
+
+- **calculate_metrics_for_json.py**: Script that calculates median metrics based on a model's output in JSON format.
+
+## Models 
+- [Llama-3.2-3B-post-ocr-correction-real-data](https://huggingface.co/m-biriuchinskii/Llama-3.2-3B-ocr-correction-3-instruction-corrected-real-data-full-params)
+- [Llama-3.2-3B-post-ocr-correction-synthetic-data](https://huggingface.co/m-biriuchinskii/Llama-3.2-post-ocr-synthetic-data-2)
+- [Llama-3.2-3B-post-ocr-correction-mixed-data](https://huggingface.co/m-biriuchinskii/Llama-3.2-3B-ocr-correction-3-instruction-corrected-mixed-data)
 
 ## Results 
 
