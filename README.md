@@ -27,7 +27,34 @@ python -m pip install git+https://github.com/JonnoB/scrambledtext
 ```
 ## Data
 
-The dataset used in this project is deployed on Hugging Face Datasets: [ICDAR2017-filtered-1800-1900-6](https://huggingface.co/datasets/m-biriuchinskii/ICDAR2017-filtered-1800-1900-6).
+The final dataset used for fine-tuning in this project is deployed on Hugging Face Datasets: [ICDAR2017-filtered-1800-1900-6](https://huggingface.co/datasets/m-biriuchinskii/ICDAR2017-filtered-1800-1900-6).
+
+The Data Processing Pipeline:
+```txt
+ICDAR2017 (original dataset)
+     │
+     ▼
+Filter on Dates, Doc Type, and Language
+     │
+     ▼
+ICDAR2017-filtered-1800-1900 
+     │
+     ▼
+GT Phrases Retrieval, Tokenization into Phrases with 85% Similarity Threshold
+     │
+     ▼
+ICDAR2017-filtered-1800-1900-5
+     │
+     ▼
+Only 15% of Dataset with Zero CER Cases
+     │
+     ▼
+Add Corruption Data
+     │
+     ▼
+ICDAR2017-filtered-1800-1900-6
+
+```
 
 ## Library Code Description
 
