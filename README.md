@@ -81,6 +81,7 @@ ICDAR2017-filtered-1800-1900-6
 - **evaluate_trained_model_on_real_data.py**: Script to evaluate the trained model using real data.
 
 - **calculate_metrics_for_json.py**: Script that calculates median metrics based on a model's output in JSON format.
+- **lib/visualisation.ipynb**: Notebook to create visualisations
 
 ## Models 
 - [Llama-3.2-3B-post-ocr-correction-real-data](https://huggingface.co/m-biriuchinskii/Llama-3.2-3B-ocr-correction-3-instruction-corrected-real-data-full-params)
